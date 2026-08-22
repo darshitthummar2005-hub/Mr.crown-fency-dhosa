@@ -1,0 +1,17 @@
+{
+  "name": "mr-crown-fancy-dosa",
+  "version": "1.0.0",
+  "description": "Website for Mr. Crown Fancy Dosa - crispy, golden and fancy dosas with a live admin panel",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "test": "node scripts/smoke-test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

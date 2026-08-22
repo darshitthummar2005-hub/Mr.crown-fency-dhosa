@@ -1,0 +1,13 @@
+{
+  "name": "mr-crown-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Mr. Crown Fancy Dosa",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
