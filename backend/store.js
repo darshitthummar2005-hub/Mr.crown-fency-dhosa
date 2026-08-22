@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { DEFAULT_DOSAS } = require('./defaultData');
+const mongo = require('./mongoStore');
 
 const REST_URL = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/$/, '');
 const REST_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
@@ -68,6 +69,7 @@ async function redisSetB64(key, b64) {
 }
 
 async function readData(kind) {
+  if (mongo.USE_MONGO) return mongo.readData(kind);
   if (USE_REDIS) {
     try {
       const cached = memCache['r:' + kind];
@@ -91,6 +93,7 @@ async function readData(kind) {
 }
 
 async function writeData(kind, data) {
+  if (mongo.USE_MONGO) return mongo.writeData(kind, data);
   if (USE_REDIS) {
     await redisSetB64('crown:' + kind, Buffer.from(JSON.stringify(data)).toString('base64'));
     memCache['r:' + kind] = { at: Date.now(), data };

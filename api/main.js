@@ -1,3 +1,5 @@
+require('../backend/loadEnv').loadEnvFile();
+
 const { createApp } = require('../backend/app');
 
 const app = createApp({ serveStatic: false });

@@ -1,4 +1,9 @@
 const path = require('path');
+const path = require('path');
+const { loadEnvFile } = require('./loadEnv');
+
+loadEnvFile();
+
 const { createApp } = require('./app');
 
 const app = createApp({ serveStatic: true });

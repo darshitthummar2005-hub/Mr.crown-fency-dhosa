@@ -78,19 +78,38 @@ Ab admin panel: `https://aapki-site.vercel.app/admin` par isi username/password 
 
 ---
 
-## STEP 5 (Recommended): Bookings/menu PERMANENT save karo
+## STEP 5 (IMPORTANT): Bookings/menu PERMANENT save karo — MongoDB se
 
-By default Vercel ka free server temporary hota hai — matlab kabhi-kabhi server restart hone par naye bookings ya admin ki kiye hue menu changes reset ho sakte hain. Isko fix karna bahut aasan hai (bilkul FREE):
+By default Vercel ka free server temporary hota hai — matlab kabhi-kabhi server restart hone par naye bookings ya admin ki kiye hue menu changes reset ho sakte hain. Isko **MongoDB (FREE)** se permanent karte hain:
 
-1. Vercel me apna project kholo → **Storage** tab
-2. **Create Database** → **Redis** (Upstash) select karo → Create
-3. Aane wale popup me **Connect to Project** karo (aapke project select karke)
-4. Bas! Environment variables automatically add ho jate hain
-5. Ab **Redeploy** karo
+### 5.1 MongoDB Atlas free account banao
+1. https://www.mongodb.com/cloud/atlas/register kholo → Sign up (Google se bhi ho jata hai)
+2. Free **M0 Cluster** select karo → Create
+3. **Database Access** me jaao → "Add New Database User" → username/password set karo (save kar lena)
+4. **Network Access** me jaao → "Add IP Address" → **Allow access from anywhere (0.0.0.0/0)**
 
-Iske baad har booking aur har menu change **permanent** save hoga. Local testing me data `backend/data/` folder ki JSON files me save hota hai.
+### 5.2 Connection string lo
+1. **Database → Connect → Drivers → Node.js**
+2. Wahan milega aisa link:
+   `mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority`
+3. `USER` aur `PASSWORD` apne database user wale se badal do
 
-> Note: Agar Redis connect nahi bhi kiya to bhi website 100% chalegi — orders WhatsApp par aate rahenge. Sirf live table availability thodi time ke liye reset ho sakti hai.
+### 5.3 Vercel me daalo
+1. Vercel project → **Settings → Environment Variables**
+2. Add karo:
+
+| Name        | Value                                            |
+|-------------|--------------------------------------------------|
+| MONGODB_URI | *upar wali connection string*                    |
+| MONGODB_DB  | mrcrown                                          |
+
+3. **Deployments** tab → latest deployment par **Redeploy** karo
+
+Ho gaya! Ab har booking aur menu change **MongoDB me permanent** save hoga. Data dekhne ke liye Atlas dashboard me **Browse Collections** kholo (`mrcrown` database).
+
+> Local testing ke liye: `.env.example` ko copy karke `.env` banao aur usme `MONGODB_URI` daal do — `npm start` automatically use karega.
+
+**Priority order:** agar `MONGODB_URI` set hai → MongoDB use hoga. Nahi to Redis (agar connected). Warna local JSON files (`backend/data/`).
 
 ---
 
