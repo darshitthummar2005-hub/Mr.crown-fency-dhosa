@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://mr-crown-fancy-dosa.vercel.app/sitemap.xml
+Sitemap: https://mr-crown-fency-dhosa.vercel.app/sitemap.xml

@@ -546,4 +546,5 @@ section[id]{scroll-margin-top:92px}
   .tables-legend{flex-wrap:wrap;gap:.8rem}
   .slot-board-head{flex-direction:column;align-items:flex-start;gap:.3rem}
   .slot-row{padding:.65rem .8rem}
+  .slot-tables{display:none}
 }

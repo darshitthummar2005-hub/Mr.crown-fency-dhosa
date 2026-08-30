@@ -176,7 +176,6 @@ function addToCart(id) {
   saveCart();
   renderCart();
   openCart();
-  showToast(d.name + ' added to your order.');
 }
 
 function setQty(id, qty) {
@@ -261,10 +260,10 @@ placeOrderBtn.addEventListener('click', () => {
   }
   let msg = 'Hello Mr. Crown Fancy Dosa! I would like to place an order:\n\n';
   items.forEach((x) => {
-    msg += x.qty + 'x ' + x.dosa.name + ' - ' + formatPrice(Number(x.dosa.price) * x.qty) + '\n';
+    msg += '\u2022 ' + x.qty + 'x ' + x.dosa.name + ' \u2014 ' + formatPrice(Number(x.dosa.price) * x.qty) + '\n';
   });
   msg += '\nTotal: ' + formatPrice(cartSubtotal());
-  msg += '\n\nName:\nAddress:\nPhone:';
+  msg += '\n\nPlease share your name and delivery address so you can send my order to me. Thank you!';
   window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
 });
 
