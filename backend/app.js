@@ -177,7 +177,11 @@ function createApiRouter() {
         createdAt: new Date().toISOString()
       };
       bookings.push(booking);
-      await writeData('bookings', bookings);
+      try {
+        await writeData('bookings', bookings);
+      } catch (writeErr) {
+        console.error('Booking could not be saved to storage (continuing via WhatsApp):', writeErr.message);
+      }
       res.status(201).json(booking);
     } catch (err) {
       console.error(err);
